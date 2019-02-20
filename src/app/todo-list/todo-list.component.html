@@ -1,3 +1,28 @@
-<p>
-  todo-list works!
-</p>
+<form class="form-inline">
+        <input name="searchInput" class="form-control" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 80%;">
+        <button class="btn btn-outline-primary" (click)="searchText=''">x</button>
+</form>
+
+<table class="table table-sm">
+        <thead>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>In Charge</th>
+                <th>Priority</th>
+        </thead>
+        <ng-container *ngFor="let item of todoitemArray">
+                <tr class="table-dark" *ngIf="filterCondition(item)">
+                        <td>{{item.task}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{item.deadline}}</td>
+                        <td>{{item.incharge}}</td>
+                        <td [ngStyle]="{color:priority(item)}">{{item.priority}}</td>
+                        <td>
+                                <button class="btn btn-info" (click)="todoitemService.populateForm(item)">Edit</button>
+                                <button class="btn btn-danger" (click)="onDelete(item.$key)">Delete</button>
+                        </td>
+                </tr>
+        </ng-container>
+</table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">Deleted successfully</div>
