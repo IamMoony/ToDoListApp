@@ -21,7 +21,7 @@ export class TodoitemComponent implements OnInit {
    if(this.todoitemService.form.valid){
            if(this.todoitemService.form.get("$key").value == null ){                    
            	this.todoitemService.insertItem(this.todoitemService.form.value);
-           	    else 
+           	   } else 
         this.todoitemService.updateItem(this.todoitemService.form.value);
        this.showSuccessMessage =true;// we set the property to true
        setTimeout(()=> this.showSuccessMessage=false,3000); // we used setTimeout here so after 3 second the showSuccessMessage value will be false
